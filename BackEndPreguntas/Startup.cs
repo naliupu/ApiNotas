@@ -1,6 +1,6 @@
 using BackEndPreguntas.Domain.IRepositories;
 using BackEndPreguntas.Domain.IServices;
-using BackEndPreguntas.Persistence.Context;
+using BackEndPreguntas.Persistence.ContextNotas;
 using BackEndPreguntas.Persistence.Repositories;
 using BackEndPreguntas.services;
 using Microsoft.AspNetCore.Builder;
@@ -30,14 +30,18 @@ namespace BackEndPreguntas
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AplicationDbContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
+            //services.AddDbContext<AplicationDbContext>(options =>
+            //            options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
+
+            services.AddEntityFrameworkSqlite().AddDbContext<notasContext>(item => item.UseSqlite(Configuration.GetConnectionString("Conexion")));
+            services.AddControllers();
+
 
             //service
             services.AddScoped<INotasService, NotasService>();
 
             //repository
-            services.AddScoped<INotasRepository, NotasRepository>();
+            services.AddScoped<INotasRepository, NotasFileRepository>();
 
             //Cors
             services.AddCors(options => options.AddPolicy("AllowWebapp",

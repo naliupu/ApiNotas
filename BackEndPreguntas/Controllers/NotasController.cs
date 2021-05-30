@@ -44,8 +44,8 @@ namespace BackEndPreguntas.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        
-        [Route("GetNote")]
+
+        //[Route("Notas")]
         [HttpGet()]
         public async Task<IActionResult> GetNote()
         {
