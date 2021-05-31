@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BackEndPreguntas.Domain.IServices;
@@ -16,11 +16,14 @@ namespace BackEndPreguntas.Controllers
             _notasService = notasService;
         }
 
+        [Route("Registrar")]
         [HttpPost]
-        public async Task<IActionResult> AddNote([FromBody] Notas notas) {
+        public async Task<IActionResult> AddNote([FromBody] Notas notas)
+        {
             try
             {
                 notas.CreationDate = DateTime.Now;
+                notas.UpdateDate = DateTime.Now;
                 await _notasService.AddNote(notas);
                 return Ok(new { message = "Nota registrada con exito!" });
             }
@@ -30,7 +33,8 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
-        [HttpPost]
+        [Route("Modificar")]
+        [HttpPut]
         public async Task<IActionResult> UpdateNote([FromBody] Notas notas)
         {
             try
@@ -45,7 +49,7 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
-        //[Route("Notas")]
+        [Route("Listar")]
         [HttpGet()]
         public async Task<IActionResult> GetNote()
         {
@@ -75,13 +79,13 @@ namespace BackEndPreguntas.Controllers
         }
 
 
-        [HttpDelete("{idNotas}")]
+        [HttpDelete("Eliminar/{idNotas}")]
         public async Task<IActionResult> DeleteNote(int idNotas)
         {
             try
             {
                 var nota = await _notasService.BuscarNota(idNotas);
-                if(nota == null)
+                if (nota == null)
                 {
                     return BadRequest(new { message = "No se encontro la nota" });
                 }

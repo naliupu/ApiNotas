@@ -9,7 +9,7 @@ using BackEndPreguntas.Domain.IServices;
 
 namespace BackEndPreguntas.services
 {
-    public class NotasService: INotasService
+    public class NotasService : INotasService
     {
         private readonly INotasRepository _notasRepository;
         public NotasService(INotasRepository notasRepository)
@@ -26,7 +26,7 @@ namespace BackEndPreguntas.services
         {
             await _notasRepository.UpdateNote(notas);
         }
-        
+
         public async Task<Notas> BuscarNota(int idNota)
         {
             return await _notasRepository.BuscarNota(idNota);
@@ -34,7 +34,7 @@ namespace BackEndPreguntas.services
 
         public async Task DeleteNote(Notas notas)
         {
-             await _notasRepository.DeleteNote(notas);
+            await _notasRepository.DeleteNote(notas);
         }
 
         public async Task<List<Notas>> GetNote()

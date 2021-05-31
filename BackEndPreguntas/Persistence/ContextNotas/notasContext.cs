@@ -10,10 +10,7 @@ namespace BackEndPreguntas.Persistence.ContextNotas
 {
     public partial class notasContext : DbContext
     {
-        //public notasContext()
-        //{
-        //}
-
+        
         public DbSet<Notas> Notas { get; set; }
 
         public notasContext(DbContextOptions<notasContext> options)

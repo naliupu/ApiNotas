@@ -37,7 +37,7 @@ namespace BackEndPreguntas.Persistence.Repositories
 
         public async Task DeleteNote(Notas notas)
         {
-            _db.Entry(notas).State = EntityState.Modified;
+            _db.Entry(notas).State = EntityState.Deleted;
             await _db.SaveChangesAsync();
         }
 
