@@ -22,8 +22,8 @@ namespace BackEndPreguntas.Controllers
         {
             try
             {
-                notas.CreationDate = DateTime.Now;
-                notas.UpdateDate = DateTime.Now;
+                notas.CreationDate = DateTime.Today;
+                notas.UpdateDate = DateTime.Today;
                 await _notasService.AddNote(notas);
                 return Ok(new { message = "Nota registrada con exito!" });
             }
@@ -33,15 +33,32 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
-        [Route("Modificar")]
-        [HttpPut]
-        public async Task<IActionResult> UpdateNote([FromBody] Notas notas)
+        //public async Task<IActionResult> UpdateNote([FromBody] int idNotas)
+        //[Route("Modificar")]
+        [HttpPut("Modificar/{idNotas}")]
+        public async Task<IActionResult> UpdateNote(int idNotas,Notas notas)
         {
             try
             {
-                notas.UpdateDate = DateTime.Now;
-                await _notasService.UpdateNote(notas);
-                return Ok(new { message = "Nota modificada con exito!" });
+
+                //var nota = _notasService.BuscarNota(notas.Id);
+                //if (nota == null)
+                //{
+                //    return BadRequest(new { message = "No se encontro la nota", nota });
+                //}
+                //notas.CreationDate = nota.CreationDate;
+                //notas.UpdateDate = DateTime.Today;
+                if (idNotas == notas.Id) {
+                    await _notasService.UpdateNote(notas);
+                    return Ok(new { message = "Nota modificada con exito!", notas });
+                }
+                else
+                {
+                    return NotFound();
+
+                }
+
+                //return NoContent();
             }
             catch (Exception ex)
             {
@@ -64,12 +81,16 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
-        [HttpGet()]
-        public async Task<IActionResult> SearchByDateNote(DateTime fecha)
+        [HttpGet("ListarFecha/{fecha}")]
+        public async Task<IActionResult> BuscarNotaFecha(DateTime fecha)
         {
             try
             {
-                var searhFecha = await _notasService.SearchByDateNote(fecha);
+                var searhFecha = await _notasService.BuscarNotaFecha(fecha);
+                //if (searhFecha == null)
+                //{
+                //    return BadRequest(new { message = "No se encontro la nota" });
+                //}
                 return Ok(searhFecha);
             }
             catch (Exception ex)

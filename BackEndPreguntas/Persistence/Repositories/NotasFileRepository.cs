@@ -25,13 +25,19 @@ namespace BackEndPreguntas.Persistence.Repositories
 
         public async Task UpdateNote(Notas notas)
         {
-            _db.Update(notas);
+            _db.Update(notas).State = EntityState.Modified;
             await _db.SaveChangesAsync();
         }
 
         public async Task<Notas> BuscarNota(int idNota)
         {
             var nota = await _db.Notas.Where(x => x.Id == idNota).FirstOrDefaultAsync();
+            return nota;
+        }
+
+        public async Task<List<Notas>> BuscarNotaFecha(DateTime fecha)
+        {
+            var nota = await _db.Notas.Where(x => x.UpdateDate == fecha).ToListAsync();
             return nota;
         }
 
@@ -45,12 +51,6 @@ namespace BackEndPreguntas.Persistence.Repositories
         {
             var notas = await _db.Notas.OrderBy(x => x.Priority).ToListAsync();
             return notas;
-        }
-
-        public async Task<Notas> SearchByDateNote(DateTime fecha)
-        {
-            var dateNote = await _db.Notas.Where(x => x.CreationDate == fecha || x.UpdateDate == fecha).FirstOrDefaultAsync();
-            return dateNote;
         }
     }
 }

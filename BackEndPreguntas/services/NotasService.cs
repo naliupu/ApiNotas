@@ -32,6 +32,11 @@ namespace BackEndPreguntas.services
             return await _notasRepository.BuscarNota(idNota);
         }
 
+        public async Task<List<Notas>> BuscarNotaFecha(DateTime fecha)
+        {
+            return await _notasRepository.BuscarNotaFecha(fecha);
+        }
+
         public async Task DeleteNote(Notas notas)
         {
             await _notasRepository.DeleteNote(notas);
@@ -40,11 +45,6 @@ namespace BackEndPreguntas.services
         public async Task<List<Notas>> GetNote()
         {
             return await _notasRepository.GetNote();
-        }
-
-        public async Task<Notas> SearchByDateNote(DateTime fecha)
-        {
-            return await _notasRepository.SearchByDateNote(fecha);
         }
     }
 }
