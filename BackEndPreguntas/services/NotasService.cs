@@ -19,11 +19,14 @@ namespace BackEndPreguntas.services
 
         public async Task AddNote(Notas notas)
         {
+            notas.CreationDate = DateTime.Today;
+            notas.UpdateDate = DateTime.Today;
             await _notasRepository.AddNote(notas);
         }
 
         public async Task UpdateNote(Notas notas)
         {
+            //notas.UpdateDate = DateTime.Today;
             await _notasRepository.UpdateNote(notas);
         }
 

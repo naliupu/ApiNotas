@@ -22,8 +22,6 @@ namespace BackEndPreguntas.Controllers
         {
             try
             {
-                notas.CreationDate = DateTime.Today;
-                notas.UpdateDate = DateTime.Today;
                 await _notasService.AddNote(notas);
                 return Ok(new { message = "Nota registrada con exito!" });
             }
@@ -36,7 +34,7 @@ namespace BackEndPreguntas.Controllers
         //public async Task<IActionResult> UpdateNote([FromBody] int idNotas)
         //[Route("Modificar")]
         [HttpPut("Modificar/{idNotas}")]
-        public async Task<IActionResult> UpdateNote(int idNotas,Notas notas)
+        public async Task<IActionResult> UpdateNote(int idNotas, Notas notas)
         {
             try
             {
@@ -48,14 +46,14 @@ namespace BackEndPreguntas.Controllers
                 //}
                 //notas.CreationDate = nota.CreationDate;
                 //notas.UpdateDate = DateTime.Today;
-                if (idNotas == notas.Id) {
+                if (idNotas == notas.Id)
+                {
                     await _notasService.UpdateNote(notas);
                     return Ok(new { message = "Nota modificada con exito!", notas });
                 }
                 else
                 {
                     return NotFound();
-
                 }
 
                 //return NoContent();
@@ -87,10 +85,6 @@ namespace BackEndPreguntas.Controllers
             try
             {
                 var searhFecha = await _notasService.BuscarNotaFecha(fecha);
-                //if (searhFecha == null)
-                //{
-                //    return BadRequest(new { message = "No se encontro la nota" });
-                //}
                 return Ok(searhFecha);
             }
             catch (Exception ex)
@@ -98,7 +92,6 @@ namespace BackEndPreguntas.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
         [HttpDelete("Eliminar/{idNotas}")]
         public async Task<IActionResult> DeleteNote(int idNotas)
