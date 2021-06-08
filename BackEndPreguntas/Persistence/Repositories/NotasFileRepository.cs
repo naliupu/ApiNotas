@@ -52,5 +52,11 @@ namespace BackEndPreguntas.Persistence.Repositories
             var notas = await _db.Notas.OrderBy(x => x.Priority).ToListAsync();
             return notas;
         }
+
+        public async Task<List<Notas>> GetNoteId(int idNotas)
+        {
+            var notas = await _db.Notas.Where(x => x.Id == idNotas).ToListAsync();
+            return notas;
+        }
     }
 }

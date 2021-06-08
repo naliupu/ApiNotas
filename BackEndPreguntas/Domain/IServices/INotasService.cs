@@ -14,5 +14,6 @@ namespace BackEndPreguntas.Domain.IServices
         Task<List<Notas>> BuscarNotaFecha(DateTime fecha);
         Task DeleteNote(Notas notas);
         Task<List<Notas>> GetNote();
+        Task<List<Notas>> GetNoteId(int idNotas);
     }
 }

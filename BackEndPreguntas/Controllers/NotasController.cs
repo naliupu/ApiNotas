@@ -79,6 +79,26 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
+        [Route("ListarNotaId/{idNotas}")]
+        [HttpGet()]
+        public async Task<IActionResult> GetNoteId(int idNotas)
+        {
+            try
+            {
+                var nota = await _notasService.BuscarNota(idNotas);
+                if (nota == null)
+                {
+                    return BadRequest(new { message = "No se encontro la nota" });
+                }
+                var notas = await _notasService.GetNoteId(nota.Id);
+                return Ok(notas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("ListarFecha/{fecha}")]
         public async Task<IActionResult> BuscarNotaFecha(DateTime fecha)
         {

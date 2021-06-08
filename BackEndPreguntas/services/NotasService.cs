@@ -49,5 +49,10 @@ namespace BackEndPreguntas.services
         {
             return await _notasRepository.GetNote();
         }
+
+        public async Task<List<Notas>> GetNoteId(int idNotas)
+        {
+            return await _notasRepository.GetNoteId(idNotas);
+        }
     }
 }
