@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\crist\\Desktop\\ApiNotas\\BackEndPreguntas\\BackEndPreguntas.csproj": {}
+    "C:\\Users\\crist\\Documents\\SUMMIT\\ApiNotas\\BackEndPreguntas\\BackEndPreguntas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\crist\\Desktop\\ApiNotas\\BackEndPreguntas\\BackEndPreguntas.csproj": {
+    "C:\\Users\\crist\\Documents\\SUMMIT\\ApiNotas\\BackEndPreguntas\\BackEndPreguntas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\crist\\Desktop\\ApiNotas\\BackEndPreguntas\\BackEndPreguntas.csproj",
+        "projectUniqueName": "C:\\Users\\crist\\Documents\\SUMMIT\\ApiNotas\\BackEndPreguntas\\BackEndPreguntas.csproj",
         "projectName": "BackEndPreguntas",
-        "projectPath": "C:\\Users\\crist\\Desktop\\ApiNotas\\BackEndPreguntas\\BackEndPreguntas.csproj",
+        "projectPath": "C:\\Users\\crist\\Documents\\SUMMIT\\ApiNotas\\BackEndPreguntas\\BackEndPreguntas.csproj",
         "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\crist\\Desktop\\ApiNotas\\BackEndPreguntas\\obj\\",
+        "outputPath": "C:\\Users\\crist\\Documents\\SUMMIT\\ApiNotas\\BackEndPreguntas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,6 +38,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.16, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.6, )"
@@ -58,9 +62,21 @@
               "target": "Package",
               "version": "[5.0.6, )"
             },
+            "Microsoft.IdentityModel.Clients.ActiveDirectory": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.11.1, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[5.0.5, )"
             }
           },
           "imports": [

@@ -1,8 +1,6 @@
 ﻿using BackEndPreguntas.Domain.Models;
-using BackEndPreguntas.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using BackEndPreguntas.Domain.IRepositories;
 using BackEndPreguntas.Domain.IServices;

@@ -1,28 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BackEndPreguntas.Domain.Models
 {
     public class Notas
     {
+        [Key]
+        [JsonProperty("idnotas")]
         public int Id { get; set; }
 
-        [Required]
-        [Column(TypeName = "varchar(100)")]
+        [JsonProperty("title")]
+        [Column(TypeName = "varchar(50)")]
         public string Title { get; set; }
 
-        [Required]
+        [JsonProperty("content")]
         [Column(TypeName = "varchar(500)")]
         public string Content { get; set; }
 
-        [Required]
+        [JsonProperty("priority")]
         public int Priority { get; set; }
 
+        [JsonProperty("datecreation")]
         public DateTime CreationDate { get; set; }
+
+        [JsonProperty("dateupdate")]
         public DateTime UpdateDate { get; set; }
     }
 }

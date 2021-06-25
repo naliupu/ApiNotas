@@ -1,0 +1,9 @@
+﻿using BackEndPreguntas.Domain.Models;
+
+namespace BackEndPreguntas.Domain.IServices
+{
+    public interface INotasAddService
+    {
+        ServiceResponse Execute(Notas notas);
+    }
+}

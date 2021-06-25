@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndPreguntas.Controllers
 {
@@ -15,7 +10,7 @@ namespace BackEndPreguntas.Controllers
         //GET
         [HttpGet]
         public string Get() {
-            return "API CORRIENDO";
+            return "API RUN............................................................................";
         }
     }
 }

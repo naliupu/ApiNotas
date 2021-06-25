@@ -1,20 +1,16 @@
 using BackEndPreguntas.Domain.IRepositories;
 using BackEndPreguntas.Domain.IServices;
+using BackEndPreguntas.Domain.Models;
+using BackEndPreguntas.Middleware;
 using BackEndPreguntas.Persistence.ContextNotas;
 using BackEndPreguntas.Persistence.Repositories;
 using BackEndPreguntas.services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BackEndPreguntas
 {
@@ -33,12 +29,34 @@ namespace BackEndPreguntas
             //services.AddDbContext<AplicationDbContext>(options =>
             //            options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
 
-            services.AddEntityFrameworkSqlite().AddDbContext<notasContext>(item => item.UseSqlite(Configuration.GetConnectionString("Conexion")));
             services.AddControllers();
+
+                var jwtTokenConfig = new JwtTokenConfig();
+                jwtTokenConfig.Secret = "xecretKeywqejannjjnakdADWe";
+                jwtTokenConfig.Audience = "http://localhost:4200/inicio";
+                jwtTokenConfig.Issuer = "http://localhost:60691/api";
+                jwtTokenConfig.AccessTokenExpiration = 10;
+                jwtTokenConfig.RefreshTokenExpiration = 50;
+
+                 services.AddSingleton(jwtTokenConfig);
+
+
+
+
+            //Conexion con una BD SQLlite
+            services.AddEntityFrameworkSqlite().AddDbContext<notasContext>(item => item.UseSqlite(Configuration.GetConnectionString("Conexion")));
+            //services.AddControllers();
 
 
             //service
             services.AddScoped<INotasService, NotasService>();
+            services.AddTransient<INotasAddService, NotasAddService>();
+            services.AddTransient<INotasGetService, NotasGetService>();
+            services.AddTransient<INotasUpdateService, NotasUpdateService>();
+            services.AddTransient<INotasDeleteService, NotasDeleteService>();
+            services.AddTransient<INotasSearchDateService, NotasSearchDateService>();
+            services.AddTransient<ILoginService, LoginService>();
+            services.AddTransient<IJwtAuthManager, JwtAuthManager>();
 
             //repository
             services.AddScoped<INotasRepository, NotasFileRepository>();
@@ -59,9 +77,13 @@ namespace BackEndPreguntas
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CDCS.NotasService v1"));
             }
 
-            app.UseCors("AllowWebapp");
+            //app.UseCors("AllowWebapp");
+            app.UseCors(options => options.AllowAnyOrigin()
+                .AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("Token", "RefreshToken"));
 
             app.UseRouting();
 

@@ -16,6 +16,7 @@ namespace BackEndPreguntas.Controllers
             _notasService = notasService;
         }
 
+        //Registra una nota
         [Route("Registrar")]
         [HttpPost]
         public async Task<IActionResult> AddNote([FromBody] Notas notas)
@@ -31,8 +32,7 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
-        //public async Task<IActionResult> UpdateNote([FromBody] int idNotas)
-        //[Route("Modificar")]
+        //Modifica una nota
         [HttpPut("Modificar/{idNotas}")]
         public async Task<IActionResult> UpdateNote(int idNotas, Notas notas)
         {
@@ -64,6 +64,8 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
+
+        //Lista todas las notas
         [Route("Listar")]
         [HttpGet()]
         public async Task<IActionResult> GetNote()
@@ -79,6 +81,7 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
+        //Lista por un id la nota
         [Route("ListarNotaId/{idNotas}")]
         [HttpGet()]
         public async Task<IActionResult> GetNoteId(int idNotas)
@@ -99,6 +102,8 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
+
+        //Lista por una fecha indicada
         [HttpGet("ListarFecha/{fecha}")]
         public async Task<IActionResult> BuscarNotaFecha(DateTime fecha)
         {
@@ -113,6 +118,7 @@ namespace BackEndPreguntas.Controllers
             }
         }
 
+        //Elimina notas
         [HttpDelete("Eliminar/{idNotas}")]
         public async Task<IActionResult> DeleteNote(int idNotas)
         {
