@@ -12,7 +12,7 @@ namespace BackEndPreguntas.Commands
         private static String ParId = "id";
         private static String ParPassword = "password";
         private static String ParUsername = "username";
-        private static String fUpdateTransaction = "SELECT id FROM CDCS.users  WHERE username =" + " @" + ParUsername 
+        private static String fUpdateTransaction = "SELECT id FROM CDCS.users  WHERE username =" + " @" + ParUsername;
 
         public Users UsersRequest { get; set; }
         public Int32 Id { get; set; }
