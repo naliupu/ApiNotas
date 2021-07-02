@@ -20,11 +20,12 @@ namespace BackEndPreguntas.Controllers
         public IActionResult Login([FromBody]Users users)
         {
             AuthenticateResponse resp = this.LoginService.Login(users);
-            if(resp.id >= 0)
+
+            if(resp != null)
             {
                 return Ok(resp);
             }
-            return BadRequest("Usuario o Contraseña inccorrectos");
+                return BadRequest("Usuario o Contraseña inccorrectos");
         }
     }
 }

@@ -35,8 +35,8 @@ namespace BackEndPreguntas
                 jwtTokenConfig.Secret = "xecretKeywqejannjjnakdADWe";
                 jwtTokenConfig.Audience = "http://localhost:4200/inicio";
                 jwtTokenConfig.Issuer = "http://localhost:60691/api";
-                jwtTokenConfig.AccessTokenExpiration = 10;
-                jwtTokenConfig.RefreshTokenExpiration = 50;
+                jwtTokenConfig.AccessTokenExpiration = 10000;
+                jwtTokenConfig.RefreshTokenExpiration = 50000;
 
                  services.AddSingleton(jwtTokenConfig);
 
@@ -66,8 +66,6 @@ namespace BackEndPreguntas
                                                  builder => builder.AllowAnyOrigin()
                                                                     .AllowAnyHeader()
                                                                     .AllowAnyMethod()));
-
-
             services.AddControllers();
         }
 
@@ -84,6 +82,8 @@ namespace BackEndPreguntas
             //app.UseCors("AllowWebapp");
             app.UseCors(options => options.AllowAnyOrigin()
                 .AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("Token", "RefreshToken"));
+
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseRouting();
 

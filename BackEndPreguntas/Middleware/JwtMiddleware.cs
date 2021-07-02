@@ -54,17 +54,18 @@ namespace BackEndPreguntas.Middleware
                     ValidAudience = jwtTokenConfig.Audience,
                     ValidateAudience = true,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromMinutes(1)
+                    ClockSkew = TimeSpan.FromMinutes(11111)
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
                 // attach user to context on successful jwt validation
-                context.Items["User"] = userId;
+                context.Items["Users"] = userId;
             }
             catch (Exception e)
             {
+                var error = e.Message;
                 // do nothing if jwt validation fails
                 // user is not attached to context so request won't have access to secure routes
             }

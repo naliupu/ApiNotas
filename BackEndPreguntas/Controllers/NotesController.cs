@@ -1,5 +1,6 @@
 ﻿using BackEndPreguntas.Domain.IServices;
 using BackEndPreguntas.Domain.Models;
+using BackEndPreguntas.Middleware;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndPreguntas.Controllers
@@ -25,6 +26,7 @@ namespace BackEndPreguntas.Controllers
         }
 
         //Obtiene todas las notas registradas
+        //[CustomAuthorize]
         [Route("getNotas")]
         [HttpGet]
         [Produces("application/json")]
@@ -34,6 +36,7 @@ namespace BackEndPreguntas.Controllers
         }
 
         //Modifica las notas
+        [CustomAuthorize]
         [Route("updateNotas")]
         [HttpPost]
         [Produces("application/json")]
@@ -43,6 +46,7 @@ namespace BackEndPreguntas.Controllers
         }
 
         //Busca una nota por una fecha indicada
+        [CustomAuthorize]
         [Route("searchDate")]
         [HttpPost]
         public ServiceResponse Search(Notas notas)
@@ -51,6 +55,7 @@ namespace BackEndPreguntas.Controllers
         }
 
         //Eliminar una nota
+        [CustomAuthorize]
         [Route("deleteNotas")]
         [HttpPost]
         [Produces("application/json")]
@@ -60,6 +65,7 @@ namespace BackEndPreguntas.Controllers
         }
 
         //Agregar una nota
+        [CustomAuthorize]
         [Route("addNotas")]
 		[HttpPost]
 		[Produces("application/json")]

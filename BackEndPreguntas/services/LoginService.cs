@@ -26,6 +26,8 @@ namespace BackEndPreguntas.services
         {
             if (users != null)
             {
+                CommandResponse resp = new CommandResponse();
+
                 String data = users.username + users.password;
                 String hashBase64 = "";
                 byte[] passwordEncoded = Encoding.ASCII.GetBytes(data);
@@ -39,14 +41,15 @@ namespace BackEndPreguntas.services
                 {
                     DbProviderFactory provider = NpgsqlFactory.Instance;
                     LoginCommand authentication = new LoginCommand(provider);
-                    CommandResponse resp = new CommandResponse();
                     authentication.UsersRequest = new Users()
                     {
+                        id = users.id,
                         username = users.username,
                         password = hashBase64
                     };
-                    authentication.Execute();
-                    if (resp.Id >= 0)
+                    //authentication.Execute();
+                    resp = authentication.Execute();
+                    if (resp.Id > 0)
                     {
                         users.id = Convert.ToInt32(resp.Id);
                         var jwtAuthResult = this.GenerateToken(users);
