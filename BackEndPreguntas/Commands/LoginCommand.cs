@@ -8,8 +8,6 @@ namespace BackEndPreguntas.Commands
 {
     public class LoginCommand : CommandBase
     {
-
-        //private static String ParId = "id";
         private static String ParPassword = "password";
         private static String ParUsername = "username";
         private static String fUpdateTransaction = "SELECT id  from cdcs.users  WHERE username =" + " @" + ParUsername + " AND password =" + " @" + ParPassword + ";";

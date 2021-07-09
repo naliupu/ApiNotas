@@ -26,7 +26,7 @@ namespace BackEndPreguntas.Controllers
         }
 
         //Obtiene todas las notas registradas
-        //[CustomAuthorize]
+        [CustomAuthorize]
         [Route("getNotas")]
         [HttpGet]
         [Produces("application/json")]

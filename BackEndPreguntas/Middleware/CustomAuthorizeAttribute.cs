@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters; 
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
 namespace BackEndPreguntas.Middleware
@@ -10,12 +10,20 @@ namespace BackEndPreguntas.Middleware
 	{
 		public void OnAuthorization(AuthorizationFilterContext context)
 		{
-			Int32 userId = (Int32)context.HttpContext.Items["Users"];
-			if (userId == 0  || context == null)
+			try
 			{
-				// not logged in
-				context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+				Int32 userId = (Int32)context.HttpContext.Items["Users"];
+				if (userId == 0 || context == null)
+				{
+					// not logged in
+					context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+				}
 			}
+			catch (Exception e)
+			{
+
+			}
+			
 		}
 	}
 }
